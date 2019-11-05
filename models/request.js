@@ -17,6 +17,10 @@ const RequestSchema = new Schema({
     required: "Phone is required"
   },
 
+  date: Date,
+
+  urgent: Boolean,
+
   saline_bags: Number,
   iv_supplies: Number,
   tape: Number,
@@ -33,5 +37,5 @@ const RequestSchema = new Schema({
   ASMQ: Number,
   NECT: Number
 });
-const Requests = mongoose.model("Requests", ProductSchema);
+const Requests = mongoose.model("Requests", RequestSchema);
 module.exports = Requests;
