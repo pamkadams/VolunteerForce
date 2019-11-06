@@ -11,8 +11,82 @@
     <h1>Inventory Logistics - Doctors Across Borders</h1>
     <h2>Order Summary</h2>
     
-    <p><%=foundOrder.lastName%></p>
-       
+    <p>Dr. <%=foundOrder.firstName%> <%=foundOrder.lastName%></p>
+    
+      <p>Phone: <%=foundOrder.phone%></p>
+    
+      <p>Order Placed: <%=foundOrder.date%></p>
+    
+        <p>Status: <%=foundOrder.urgent%></p>
+          
+<table>
+        <tr>
+          <th>Supplies Requested</th>
+          <th>Quantity</th>
+        </tr>
+        <tr>
+            <td>Saline bags</td>
+            <td><%=foundOrder.saline_bags%></td>
+          
+        </tr>
+      
+      <tr>
+            <td>tape</td>
+            <td><%=foundOrder.tape%></td>
+          
+        </tr><tr>
+                <td>bandages: 4x4</td>
+                <td><%=foundOrder.bandages_4x4%></td>
+              
+        </tr><tr>
+            <td>bandages: 6x9</td>
+            <td><%=foundOrder.bandages_6x9%></td>
+                  
+        </tr><tr>
+            <td>bandages: 2x2</td>
+            <td><%=foundOrder.bandages_2x2%></td>
+          
+        </tr><tr>
+            <td>IV supplies</td>
+            <td><%=foundOrder.iv_supplies%></td>
+              
+        </tr><tr>
+             <td>gauze</td>
+            <td><%=foundOrder.gauze%></td>
+                  
+        </tr><tr>
+                <td>RX: benznidazole</td>
+                <td><%=foundOrder.benznidazole%></td>
+              
+        </tr><tr>
+                <td>aspirin</td>
+                <td><%=foundOrder.aspirin%></td>
+        </tr><tr>
+                <td>oral gluscose</td>
+                <td><%=foundOrder.gluscose%></td>
+                      
+        </tr><tr>
+                <td>RX: albuterol</td>
+                <td><%=foundOrder.albuterol%></td>
+              
+        </tr><tr>
+                <td>RX: Fexinidazole</td>
+                <td><%=foundOrder.Fexinidazole%></td>
+                  
+        </tr><tr>
+                 <td>RX: rifampicin</td>
+                <td><%=foundOrder.rifampicin%></td>
+                      
+        </tr><tr>
+                <td>RX: ASMQ</td>
+                <td><%=foundOrder.ASMQ%></td>
+                      
+        </tr><tr>
+                <td>RX: NECT</td>
+                <td><%=foundOrder.NECT%></td>
+                          
+        </tr>
+            </table> 
       </body>
     </html>
     <footer>

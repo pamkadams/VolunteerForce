@@ -28,7 +28,7 @@ const ForceSchema = new Schema({
   bandages_2x2: Number,
   bandages_4x4: Number,
   bandages_6x9: Number,
-  benznidazoleBottomPecan: Number,
+  benznidazole: Number,
   aspirin: Number,
   gluscose: Number,
   albuterol: Number,
