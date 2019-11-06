@@ -70,7 +70,13 @@ router.get("/:id/edit", (req, res) => {
 
 //DELETE
 router.delete("/:id", (req, res) => {
-  res.send("delete");
+  Force.findByIdAndRemove(req.params.id, (err, deletedOrder) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/request");
+    }
+  });
 });
 
 //UPDATE Edit
