@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const RequestSchema = new Schema({
+const ForceSchema = new Schema({
   location: String,
   lastName: {
     type: String,
@@ -37,5 +37,5 @@ const RequestSchema = new Schema({
   ASMQ: Number,
   NECT: Number
 });
-const Requests = mongoose.model("Requests", RequestSchema);
-module.exports = Requests;
+const Force = mongoose.model("Force", ForceSchema);
+module.exports = Force;

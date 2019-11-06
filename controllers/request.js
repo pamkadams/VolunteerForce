@@ -1,25 +1,42 @@
 //////////////DEPENDENCIES////////////////////
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose").set("debug", true);
+//const mongoose = require("mongoose").set("debug", true);
 
 //////////////MODELS///////////////////
-const Requests = require("../models/request.js");
+const Force = require("../models/request.js");
 
 //////////////ROUTES////////////////////
 
 //INDEX
 router.get("/", (req, res) => {
-  res.send("index");
+  Force.find({}, (error, allRequests) => {
+    let urgentPriority = [];
+    let regularPriority = [];
+    if (error) {
+      res.send(error);
+    }
+    allRequests.forEach(request => {
+      if (request.urgent) urgentPriority.push(request);
+      else regularPriority.push(request);
+    });
+    res.render("index.ejs", {
+      urgentPriority,
+      regularPriority
+    });
+  });
 });
+
 //NEW
 router.get("/new", (req, res) => {
-  res.send("new");
+  res.render("new.ejs");
 });
 
 //SHOW
 router.get("/:index", (req, res) => {
-  res.send("show");
+  Force.findById(req.params.index, (err, foundOrder) => {
+    res.render("show.ejs", { foundOrder });
+  });
 });
 
 //CREATE
@@ -29,7 +46,7 @@ router.post("/", (req, res) => {
 });
 //EDIT
 router.get("/:id/edit", (req, res) => {
-  res.send("edit");
+  res.render("edit.ejs");
 });
 
 //DELETE
