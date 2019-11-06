@@ -3,19 +3,11 @@ const Schema = mongoose.Schema;
 
 const ForceSchema = new Schema({
   location: String,
-  lastName: {
-    type: String,
-    required: "Name is required"
-  },
+  lastName: String,
 
-  firstName: {
-    type: String,
-    required: "Name is required"
-  },
-  phone: {
-    type: String,
-    required: "Phone is required"
-  },
+  firstName: String,
+
+  phone: String,
 
   date: Date,
 

@@ -8,9 +8,115 @@
   </head>
   <body>
         <% include ./partials/nav.ejs %>
-    <h1>Inventory Logistics - Doctors Across Borders</h1>
+    <h2>Inventory Logistics</h2>
     <h2>Edit Order</h2>
-       
+    <form action="/request<%=request.id%>?_method=PUT" method="POST">
+
+        Check if urgent  <input type="checkbox" name="Urgent" />
+        <table>
+            <tr>
+              <th>Contact Information</th>
+              <th></th>
+            </tr>
+            <tr>
+                <td>First Name</td>
+               
+                <td> <input type="text" name="firstName" value="<%=request.firstName%>"/></td>
+            </tr> <tr>
+                    <td>Last Name</td>
+                   
+                    <td> <input type="text" name="lastName" /></td>
+                </tr>
+                <tr>
+                        <td>Phone</td>
+                       
+                        <td> <input type="text" name="phone" /></td>
+                    </tr>
+    
+        <th>Supplies Requested</th>
+        <br>
+        <th>Quantity</th>
+      </tr>
+      <tr>
+          <td>Saline bags
+         
+          <td> <input type="number" name="saline_bags" /></td>
+      </tr>
+    
+    <tr>
+          <td>tape</td>
+          <td> <input type="number" name="tape" /></td>
+          
+        
+      </tr><tr>
+              <td>bandages: 4x4</td>
+              <td> <input type="number" name="bandages_4x4" /></td>
+              
+            
+      </tr><tr>
+          <td>bandages: 6x9</td>
+          <td> <input type="number" name="bandages_6x9" /></td>
+          
+                
+      </tr><tr>
+          <td>bandages: 2x2</td>
+          <td> <input type="number" name="bandages_2x2" /></td>
+          
+        
+      </tr><tr>
+          <td>IV supplies</td>
+          <td> <input type="number" name="iv_supplies" /></td>
+          
+            
+      </tr><tr>
+           <td>gauze</td>
+           <td> <input type="number" name="gauze" /></td>
+          
+                
+      </tr><tr>
+              <td>RX: benznidazole</td>
+              <td> <input type="number" name="benznidazole" /></td>
+             
+            
+      </tr><tr>
+              <td>aspirin</td>
+              <td> <input type="number" name="aspirin" /></td>
+             
+      </tr><tr>
+              <td>oral gluscose</td>
+              <td> <input type="number" name="gluscose" /></td>
+              
+                    
+      </tr><tr>
+              <td>RX: albuterol</td>
+              <td> <input type="number" name="albuterol" /></td>
+              
+            
+      </tr><tr>
+              <td>RX: Fexinidazole</td>
+              <td> <input type="number" name="Fexinidazole" /></td>
+              
+                
+      </tr><tr>
+               <td>RX: rifampicin</td>
+               <td> <input type="number" name="rifampicin" /></td>
+              
+                    
+      </tr><tr>
+              <td>RX: ASMQ</td>
+              <td> <input type="number" name="ASMQ" /></td>
+              
+                    
+      </tr><tr>
+              <td>RX: NECT</td>
+              <td> <input type="number" name="NECT" /></td>                
+      </tr>
+          </table> 
+   
+    
+  
+                <input type="submit" name="" value="Create Order"/>
+            </form>
       </body>
     </html>
     <footer>

@@ -41,12 +41,31 @@ router.get("/:index", (req, res) => {
 
 //CREATE
 router.post("/", (req, res) => {
-  res.send("create");
-  x;
+  if (req.body.urgent === "on") {
+    req.body.urgent = true;
+  } else {
+    req.body.urgent = false;
+  }
+
+  Force.create(req.body, (error, newRequest) => {
+    if (error) {
+      res.send(error);
+    } else {
+      res.redirect("/request");
+    }
+  });
 });
 //EDIT
 router.get("/:id/edit", (req, res) => {
-  res.render("edit.ejs");
+  Force.findById(req.params.id, (error, foundOrder) => {
+    if (error) {
+      console.log(error);
+    } else {
+      res.render("edit.ejs", {
+        request: foundOrder
+      });
+    }
+  });
 });
 
 //DELETE

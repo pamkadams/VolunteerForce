@@ -8,8 +8,8 @@
   </head>
   <body>
         <% include ./partials/nav.ejs %>
-    <h1>Inventory Logistics - Doctors Across Borders</h1>
-        
+    <h2>Inventory Logistics </h2>
+    <h2>Summary of Orders </h2>
         <ul>
             <h3 class="urgent">URGENT! ACTION THIS DAY!</h3>
           <% urgentPriority.forEach(element => {%>
@@ -17,7 +17,7 @@
             <a href="/request/<%=element.id; %>"><%=element.lastName;%>, <%=element.firstName;%></a> 
             <%=element.date; %> 
             
-            <a href="/request/:id/edit"><button type="button" name="button" class="new-product three columns">Edit</button></a>
+            <a href="/request/<%=element.id%>/edit"><button type="button" name="button" class="new-product three columns">Edit</button></a>
             <form action="/request/<%=element.id; %>?_method=DELETE" method="POST">
               <input type="submit" value="DELETE" />
             </form>
