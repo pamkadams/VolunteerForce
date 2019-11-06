@@ -10,7 +10,7 @@
         <% include ./partials/nav.ejs %>
     <h2>Inventory Logistics</h2>
     <h2>Edit Order</h2>
-    <form action="/request<%=request.id%>?_method=PUT" method="POST">
+    <form action="/request/<%=request.id%>?_method=PUT" method="POST">
 
         Check if urgent  <input type="checkbox" name="Urgent" />
         <table>
@@ -25,12 +25,12 @@
             </tr> <tr>
                     <td>Last Name</td>
                    
-                    <td> <input type="text" name="lastName" /></td>
+                    <td> <input type="text" name="lastName" value="<%=request.lastName%>"/></td>
                 </tr>
                 <tr>
                         <td>Phone</td>
                        
-                        <td> <input type="text" name="phone" /></td>
+                        <td> <input type="text" name="phone" value="<%=request.phone%>"/></td>
                     </tr>
     
         <th>Supplies Requested</th>
@@ -38,84 +38,81 @@
         <th>Quantity</th>
       </tr>
       <tr>
-          <td>Saline bags
+          <td>Saline bags</td>
          
-          <td> <input type="number" name="saline_bags" /></td>
+          <td> <input type="number" name="saline_bags" value="<%=request.saline_bags%>"/></td>
       </tr>
     
     <tr>
           <td>tape</td>
-          <td> <input type="number" name="tape" /></td>
+          <td> <input type="number" name="tape" value="<%=request.tape%>"/></td>
           
         
       </tr><tr>
               <td>bandages: 4x4</td>
-              <td> <input type="number" name="bandages_4x4" /></td>
+              <td> <input type="number" name="bandages_4x4" value="<%=request.bandages_4x4%>"/></td>
               
             
       </tr><tr>
           <td>bandages: 6x9</td>
-          <td> <input type="number" name="bandages_6x9" /></td>
+          <td> <input type="number" name="bandages_6x9" value="<%=request.bandages_6x9%>"/></td>
           
                 
       </tr><tr>
           <td>bandages: 2x2</td>
-          <td> <input type="number" name="bandages_2x2" /></td>
+          <td> <input type="number" name="bandages_2x2" value="<%=request.bandages_2x2%>"/></td>
           
         
       </tr><tr>
           <td>IV supplies</td>
-          <td> <input type="number" name="iv_supplies" /></td>
+          <td> <input type="number" name="iv_supplies" value="<%=request.iv_supplies%>"/></td>
           
             
       </tr><tr>
            <td>gauze</td>
-           <td> <input type="number" name="gauze" /></td>
+           <td> <input type="number" name="gauze" value="<%=request.gauze%>"/></td>
           
                 
       </tr><tr>
               <td>RX: benznidazole</td>
-              <td> <input type="number" name="benznidazole" /></td>
+              <td> <input type="number" name="benznidazole" value="<%=request.benznidazole%>"/></td>
              
             
       </tr><tr>
               <td>aspirin</td>
-              <td> <input type="number" name="aspirin" /></td>
+              <td> <input type="number" name="aspirin" value="<%=request.aspirin%>"/></td>
              
       </tr><tr>
               <td>oral gluscose</td>
-              <td> <input type="number" name="gluscose" /></td>
+              <td> <input type="number" name="gluscose" value="<%=request.gluscose%>"/></td>
               
                     
       </tr><tr>
               <td>RX: albuterol</td>
-              <td> <input type="number" name="albuterol" /></td>
+              <td> <input type="number" name="albuterol" value="<%=request.albuterol%>"/></td>
               
             
       </tr><tr>
               <td>RX: Fexinidazole</td>
-              <td> <input type="number" name="Fexinidazole" /></td>
+              <td> <input type="number" name="Fexinidazole" value="<%=request.Fexinidazole%>"/></td>
               
                 
       </tr><tr>
                <td>RX: rifampicin</td>
-               <td> <input type="number" name="rifampicin" /></td>
+               <td> <input type="number" name="rifampicin" value="<%=request.rifampicin%>"/></td>
               
                     
       </tr><tr>
               <td>RX: ASMQ</td>
-              <td> <input type="number" name="ASMQ" /></td>
+              <td> <input type="number" name="ASMQ" value="<%=request.ASMQ%>"/></td>
               
                     
       </tr><tr>
               <td>RX: NECT</td>
-              <td> <input type="number" name="NECT" /></td>                
+              <td> <input type="number" name="NECT" value="<%=request.NECT%>"/></td>                
       </tr>
           </table> 
-   
-    
-  
-                <input type="submit" name="" value="Create Order"/>
+                <input type="submit" name="" value="Submit Changes" />
             </form>
       </body>
     </html>

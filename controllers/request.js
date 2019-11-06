@@ -75,7 +75,25 @@ router.delete("/:id", (req, res) => {
 
 //UPDATE Edit
 router.put("/:id", (req, res) => {
-  res.send("is this it");
+  if (req.body.urgent === "on") {
+    req.body.urgent = true;
+  } else {
+    req.body.urgent = false;
+  }
+
+  console.log("is this it", req.body);
+  Force.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+
+    (err, updatedOrder) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("show.ejs", { foundOrder: updatedOrder });
+      }
+    }
+  );
 });
 
 module.exports = router;
