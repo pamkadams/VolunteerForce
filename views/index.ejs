@@ -7,34 +7,50 @@
     <title>Summary of Requests</title>
   </head>
   <body>
+    
         <% include ./partials/nav.ejs %>
-    <h2>Inventory Logistics </h2>
-    <h2>Summary of Orders </h2>
-        <ul>
-            <h3 class="urgent">URGENT! ACTION THIS DAY!</h3>
+        
+    <h2>Inventory Logistics  -Summary of Orders </h2>
+    <div id="parent" class ="d-flex p-2">
+    <div class="d-flex justify-content-center" > 
+    <section class="form-elegant scrollbar-light-blue">
+  
+    <ul>
+            <h3 class="urgent">URGENT! High Priority</h3>
           <% urgentPriority.forEach(element => {%>
           <li>
-            <a href="/request/<%=element.id; %>"><%=element.lastName;%>, <%=element.firstName;%></a> 
+         
+              <a href="/request/<%=element.id%>/edit"><button type="button" name="button" class="new-product three columns">Edit</button></a>
+            <a href="/request/<%=element.id; %>">Dr. <%=element.lastName;%> (<%=element.location;%>)</a> 
             <%=element.date; %> 
             
-            <a href="/request/<%=element.id%>/edit"><button type="button" name="button" class="new-product three columns">Edit</button></a>
+         
             
           </li>
           <% }) %>
         </ul>
-        <ul>
+        </section>
+      </div> 
+      <div class="d-flex justify-content-center" > 
+          <section class="form-elegant scrollbar-light-blue">
+          <ul>
           <h3 class="urgent">Standard Priority</h3>
           <% regularPriority.forEach(element => {%>
           <li>
-            <a href="/request/<%=element.id; %>"><%=element.lastName;%>, <%=element.firstName;%></a> 
+              <a href="/request/<%=element.id%>/edit"><button type="button" name="button" class="new-product three columns">Edit</button></a>  
+            <a href="/request/<%=element.id; %>">Dr. <%=element.lastName;%> (<%=element.location;%>)</a> 
             <%=element.date; %> 
             
-            <a href="/request/<%=element.id%>/edit"><button type="button" name="button" class="new-product three columns">Edit</button></a>
             
+           
+          
             </form>
           </li>
           <% }) %>
         </ul>
+      </section>
+      </div> 
+    </div>
       </body>
     </html>
     <footer>
