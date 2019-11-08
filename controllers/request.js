@@ -39,32 +39,6 @@ router.get("/:index", (req, res) => {
   });
 });
 
-//DETAIL
-router.get("/site", (req, res) => {
-  Force.find({}, (error, allRequests) => {
-    let syria = allRequests.filter(request => request.location === "Syria");
-    let urgentPriority = [];
-    let regularPriority = [];
-    if (error) {
-      res.send(error);
-    }
-    syria.forEach(request => {
-      if (request.urgent) urgentPriority.push(request);
-      else regularPriority.push(request);
-    });
-    res.render("location.ejs", {
-      urgentPriority,
-      regularPriority,
-      syria
-    });
-  });
-});
-
-//DETAIL
-router.get("/Syria", (req, res) => {
-  Force.find({ location: "Syria" }, (err, FoundOrder));
-});
-
 //CREATE
 router.post("/", (req, res) => {
   if (req.body.urgent === "on") {
