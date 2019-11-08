@@ -213,6 +213,15 @@ html CSS .form-elegant .font-small {
   overflow-y: scroll;
 }
 
+.col-prefix-3 {
+  justify-content: left;
+  align-content: flex-start;
+}
+
+.col-auto2 {
+  flex: 1;
+  align-content: flex-start;
+}
 @media only screen and (max-width: 982px) {
   .d-flex {
     overflow: none;

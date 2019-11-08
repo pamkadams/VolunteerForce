@@ -33,7 +33,14 @@ router.get("/new", (req, res) => {
 });
 
 //SHOW
-router.get("/location", (req, res) => {
+router.get("/:index", (req, res) => {
+  Force.findById(req.params.index, (err, foundOrder) => {
+    res.render("show.ejs", { foundOrder });
+  });
+});
+
+//DETAIL
+router.get("/site", (req, res) => {
   Force.find({}, (error, allRequests) => {
     let syria = allRequests.filter(request => request.location === "Syria");
     let urgentPriority = [];
