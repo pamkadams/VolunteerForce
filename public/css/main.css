@@ -235,3 +235,19 @@ html CSS .form-elegant .font-small {
 .form-elegant {
   color: #9fd8f7;
 }
+
+.imgclass {
+  height: 100vh;
+  position: relative; /* establish nearest positioned ancestor for
+                                             absolute positioning */
+}
+
+h4 span {
+  color: #de0549;
+  opacity: 0.6;
+
+  position: absolute;
+  left: 75vh; /* horizontal alignment */
+  top: 60vh; /* vertical alignment */
+  transform: translate(-50%, -50%);
+}

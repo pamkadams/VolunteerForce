@@ -4,10 +4,8 @@ const app = express();
 const mongoose = require("mongoose").set("debug", true);
 const methodOverride = require("method-override");
 const requestController = require("./controllers/request.js");
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/volunteer";
 const port = process.env.PORT || 3000;
-
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/volunteer";
 const Force = require("./models/request.js");
 //////////////MIDDLEWARE//////////////////
 app.use(express.urlencoded({ extended: true }));
@@ -35,13 +33,15 @@ app.get("/", (req, res) => {
 
 /////////////DB SETUP///////////////////
 //Mongoose database
-mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-mongoose.connection.once("open", () => {
-  console.log("connected to mongo");
-});
+mongoose.connect(
+  MONGODB_URI,
+  {
+    useNewUrlParser: true
+  },
+  () => {
+    console.log("connected to mongo");
+  }
+);
 
 //listen
 app.listen(port, (req, res) => console.log("app running on port 3000"));
