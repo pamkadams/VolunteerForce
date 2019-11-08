@@ -6,7 +6,7 @@ const methodOverride = require("method-override");
 const requestController = require("./controllers/request.js");
 const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://localhost:27017/volunteer";
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 //////////////MIDDLEWARE//////////////////
 app.use(express.urlencoded({ extended: true }));
@@ -25,4 +25,4 @@ mongoose.connection.once("open", () => {
 });
 
 //listen
-app.listen(3000, (req, res) => console.log("listening on PORT 3000!"));
+app.listen(3000, (req, res) => console.log("app running on port 8080"));
