@@ -33,10 +33,29 @@ router.get("/new", (req, res) => {
 });
 
 //SHOW
-router.get("/:index", (req, res) => {
-  Force.findById(req.params.index, (err, foundOrder) => {
-    res.render("show.ejs", { foundOrder });
+router.get("/location", (req, res) => {
+  Force.find({}, (error, allRequests) => {
+    let syria = allRequests.filter(request => request.location === "Syria");
+    let urgentPriority = [];
+    let regularPriority = [];
+    if (error) {
+      res.send(error);
+    }
+    syria.forEach(request => {
+      if (request.urgent) urgentPriority.push(request);
+      else regularPriority.push(request);
+    });
+    res.render("location.ejs", {
+      urgentPriority,
+      regularPriority,
+      syria
+    });
   });
+});
+
+//DETAIL
+router.get("/Syria", (req, res) => {
+  Force.find({ location: "Syria" }, (err, FoundOrder));
 });
 
 //CREATE

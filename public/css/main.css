@@ -8,6 +8,36 @@
   margin: 10px;
 }
 
+.urgentPriority {
+  color: #de0549;
+  font-weight: 600;
+  font-size: 2rem;
+}
+.regularPriority {
+  color: #1c2c4f;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.btwtext {
+  color: #9dd8f8;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.ht:hover .tooltip {
+  display: block;
+}
+
+.tooltip {
+  display: none;
+  color: #9dd8f8;
+  margin-left: 28px; /* moves the tooltip to the right */
+  margin-top: 15px; /* moves it down */
+  position: absolute;
+  z-index: 1000;
+}
+
 h5 {
   margin: 0 !important;
   padding: 0 !important;

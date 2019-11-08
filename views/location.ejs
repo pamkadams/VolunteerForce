@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      
+                <% include ./partials/head.ejs %>
+              
+    <title>Summary of Requests</title>
+  </head>
+  <body>
+    
+    <h5>Inventory Logistics Summary - <%=syria[0].location%></h5>
+    <div class="d-flex">
+        <div class ='summaryChild'>      
+        <img src="/images/noun_medication_1995238.png" width=12% height = auto>
+        <p><span class="urgentPriority"><%=urgentPriority.length%></span><span class="btwtext">/</span><span class="regularPriority"><%=regularPriority.length%></span></p>
+        </div>
+        <div class ='summaryChild'>      
+                <img src="/images/noun_bandages_1580604.png" width=12% height = auto>
+                <p><span class="urgentPriority"><%=urgentPriority.length%></span><span class="btwtext">/</span><span class="regularPriority"><%=regularPriority.length%></span></p>
+                </div>
+
+    </div>
+    
+    <div id="parent" class ="d-flex p-2">
+
+    <div class="d-flex justify-content-center" > 
+      
+          <section class="form-elegant scrollbar-light-blue">
+              <h3 class="urgent">Urgent</h3>
+            <ul>
+          
+          <% urgentPriority.forEach(element => {%>
+          <li>
+              <a href="/request/<%=element.id%>/edit"><button type="button" name="button" class="new-product three columns">Edit</button></a> 
+              <a href="/request/<%=element.id; %>">Dr. <%=element.lastName;%> (<%=element.location;%>)</a> 
+            <%=element.date; %> 
+            
+            
+           
+          
+            </form>
+          </li>
+          <% }) %>
+        </ul>
+      </section>
+      </div> 
+
+
+      <div class="d-flex justify-content-center" > 
+          <section class="form-elegant scrollbar-light-blue">
+          <ul>
+          <h3 class="urgent">Standard Priority</h3>
+          <% regularPriority.forEach(element => {%>
+          <li>
+              <a href="/request/<%=element.id%>/edit"><button type="button" name="button" class="new-product three columns">Edit</button></a>  
+            <a href="/request/<%=element.id; %>">Dr. <%=element.lastName;%> (<%=element.location;%>)</a> 
+            <%=element.date; %> 
+            
+            
+           
+          
+            </form>
+          </li>
+          <% }) %>
+        </ul>
+      </section>
+      </div> 
+    </div>
+      </body>
+    </html>
+    <footer>
+    <% include ./partials/footer.ejs %>
+    </footer>
+  </body>
+</html>
