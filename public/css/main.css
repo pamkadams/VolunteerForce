@@ -217,7 +217,19 @@ html CSS .form-elegant .font-small {
   justify-content: left;
   align-content: flex-start;
 }
-
+th {
+  font-weight: 600;
+  text-decoration: underline;
+  margin: 5px;
+  padding: 5px 20px;
+}
+td {
+  padding: 5px 20px;
+  margin: 5px;
+}
+#gutterspace {
+  padding-left: 25px;
+}
 .col-auto2 {
   flex: 1;
   align-content: flex-start;
