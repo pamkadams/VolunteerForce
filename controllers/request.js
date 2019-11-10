@@ -11,19 +11,73 @@ const Force = require("../models/request.js");
 //INDEX
 router.get("/", (req, res) => {
   Force.find({}, (error, allRequests) => {
-    let urgentPriority = [];
-    let regularPriority = [];
     if (error) {
       res.send(error);
     }
-    allRequests.forEach(request => {
-      if (request.urgent) urgentPriority.push(request);
-      else regularPriority.push(request);
+  });
+class Location{
+  constructor(){
+    this.
+  }
+}
+  //variables to sort and analyze the data
+  let urgentPriority = [];
+  let regularPriority = [];
+  let num = 0;
+  let medicalSupplies = [
+    "saline_bags",
+    "iv_supplies",
+    "tape",
+    "gauze",
+    "bandages_2x2",
+    "bandages_4x4:",
+    "bandages_6x9",
+    "aspirin",
+    "gluscose"
+  ];
+  let prescriptions = [
+    "benznidazole",
+    "albuterol",
+    "Fexinidazole",
+    "rifampicin",
+    "ASMQ",
+    "NECT"
+  ];
+
+  //sort the data by urgency
+  allRequests.forEach(request => {
+    if (request.urgent) urgentPriority.push(request);
+    else regularPriority.push(request);
+  });
+
+  //function to sort by type of urgency and supply type
+  const requestRatio = (arr, checkArr) => {
+    let count = 0;
+
+    arr.forEach(request => {
+      let keyArr = Object.keys(request._doc);
+      console.log(keyArr);
+      keyArr.forEach(element => {
+        if (checkArr.includes(element)) count++;
+      });
     });
-    res.render("index.ejs", {
-      urgentPriority,
-      regularPriority
-    });
+    return count;
+  };
+
+  let urgentRXCount = requestRatio(urgentPriority, prescriptions);
+  let regularRXCount = requestRatio(regularPriority, prescriptions);
+  let urgentMSCount = requestRatio(urgentPriority, medicalSupplies);
+  let regularMSCount = requestRatio(regularPriority, medicalSupplies);
+  console.log(urgentRXCount, urgentMSCount, regularRXCount, regularMSCount);
+
+  //display results
+  res.render("index.ejs", {
+    urgentPriority,
+    regularPriority,
+    urgentRXCount,
+    urgentMSCount,
+    regularRXCount,
+    regularMSCount
   });
 });
 
