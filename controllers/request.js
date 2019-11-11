@@ -39,11 +39,85 @@ router.get("/", (req, res) => {
       "NECT"
     ];
 
+    let sudanUrgent = 0;
+    let syriaUrgent = 0;
+    let malaysianUrgent = 0;
+    let venezuelaUrgent = 0;
+    let regularUrgent = [];
+    let sortUrgent = [];
+
     //sort the data by urgency
     allRequests.forEach(request => {
       if (request.urgent) urgentPriority.push(request);
       else regularPriority.push(request);
     });
+
+    //highest demand site
+
+    urgentPriority.forEach(request => {
+      switch (request.location) {
+        case "Sudan":
+          sudanUrgent++;
+          break;
+        case "Syria":
+          syriaUrgent++;
+          break;
+        case "Malyasia":
+          malaysiaUrgent++;
+          break;
+        case "Venezuela":
+          venezuelaUrgent++;
+          break;
+        default:
+          break;
+      }
+    });
+    sortUrgent = [
+      ["Sudan", sudanUrgent],
+      ["Syria", syriaUrgent],
+      ["Malyasia", malaysianUrgent],
+      ["Venezuela", venezuelaUrgent]
+    ];
+    function sortNumber(a, b) {
+      return a[1] - b[1];
+    }
+    sortUrgent.sort(sortNumber);
+    console.log("sort", sortUrgent);
+
+    //highest regular site
+    sudanUrgent = 0;
+    syriaUrgent = 0;
+    malaysianUrgent = 0;
+    venezuelaUrgent = 0;
+    regularPriority.forEach(request => {
+      switch (request.location) {
+        case "Sudan":
+          sudanUrgent++;
+          break;
+        case "Syria":
+          syriaUrgent++;
+          break;
+        case "Malyasia":
+          malaysiaUrgent++;
+          break;
+        case "Venezuela":
+          venezuelaUrgent++;
+          break;
+        default:
+          break;
+      }
+    });
+    sortRegular = [
+      ["Sudan", sudanUrgent],
+      ["Syria", syriaUrgent],
+      ["Malyasia", malaysianUrgent],
+      ["Venezuela", venezuelaUrgent]
+    ];
+    function sortNumber(a, b) {
+      return a[1] - b[1];
+    }
+    sortUrgent.sort(sortNumber);
+    console.log("sort", sortRegular);
 
     //function to sort by type of urgency and supply type
     const requestRatio = (arr, checkArr) => {
@@ -51,7 +125,7 @@ router.get("/", (req, res) => {
 
       arr.forEach(request => {
         let keyArr = Object.keys(request._doc);
-        console.log(keyArr);
+        //console.log(keyArr);
         keyArr.forEach(element => {
           if (checkArr.includes(element)) count++;
         });
@@ -72,7 +146,9 @@ router.get("/", (req, res) => {
       urgentRXCount,
       urgentMSCount,
       regularRXCount,
-      regularMSCount
+      regularMSCount,
+      sortUrgent,
+      sortRegular
     });
   });
 });

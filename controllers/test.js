@@ -1,192 +1,171 @@
-let location = [
-  {
-    foo: {
-      location: "Sudan",
-      lastName: "Venturi",
-      firstName: "Josh",
-      phone: "555-555-5555",
-      date: null,
-      urgent: false,
-      saline_bags: null,
-      iv_supplies: null,
-      tape: null,
-      gauze: null,
-      bandages_2x2: null,
-      bandages_4x4: null,
-      bandages_6x9: null,
-      benznidazole: null,
-      aspirin: null,
-      gluscose: null,
-      albuterol: null,
-      Fexinidazole: null,
-      rifampicin: null,
-      ASMQ: null,
-      NECT: null
-    }
-  },
+l
+//highest demand site
 
-  {
-    
+let sudanUrgent = 0;
+let syriaUrgent = 0;
+let malaysianUrgent = 0;
+let venezuelaUrgent = 0;
+urgentPriority.forEach(request => {
+  switch (request.location) {
+    case "Sudan":
+      sudanUrgent++;
+      break;
+    case "Syria":
+      syriaUrgent++;
+      break;
+    case "Malyasia":
+      malaysiaUrgent++;
+      break;
+    case "Venezuela":
+      venezuelaUrgent++;
+      break;
+    default:
+      break;
   }
-];
-let site = [
-    {name: 'WorldWide',
-    requests: [{
-        location: "Sudan",
-        lastName: "Venturi",
-        firstName: "Josh",
-        phone: "555-555-5555",
-        date: null,
-        urgent: false,
-        saline_bags: 1,
-        iv_supplies: null,
-        tape: null,
-        gauze: 1,
-        bandages_2x2: null,
-        bandages_4x4: null,
-        bandages_6x9: null,
-        benznidazole: null,
-        aspirin: null,
-        gluscose: null,
-        albuterol: null,
-        Fexinidazole: 1,
-        rifampicin: 14,
-        ASMQ: null,
-        NECT: null},{
-        location: "Syria",
-        lastName: "Venturi",
-        firstName: "Josh",
-        phone: "555-555-5555",
-        date: null,
-        urgent: true,
-        saline_bags: null,
-        iv_supplies: 1,
-        tape: null,
-        gauze: null,
-        bandages_2x2: null,
-        bandages_4x4: null,
-        bandages_6x9: null,
-        benznidazole: null,
-        aspirin: 1,
-        gluscose: null,
-        albuterol: null,
-        Fexinidazole: null,
-        rifampicin: 1,
-        ASMQ: null,
-        NECT: null}]},
-    {name: 'Sudan',
-    requests: [{
-        location: "Sudan",
-        lastName: "Venturi",
-        firstName: "Josh",
-        phone: "555-555-5555",
-        date: null,
-        urgent: false,
-        saline_bags: null,
-        iv_supplies: null,
-        tape: null,
-        gauze: null,
-        bandages_2x2: null,
-        bandages_4x4: null,
-        bandages_6x9: null,
-        benznidazole: null,
-        aspirin: null,
-        gluscose: null,
-        albuterol: null,
-        Fexinidazole: null,
-        rifampicin: null,
-        ASMQ: null,
-        NECT: null
-      }]},
-    {name: 'Syria',
-    requests: [ {
-        location: "Syria",
-        lastName: "Venturi",
-        firstName: "Josh",
-        phone: "555-555-5555",
-        date: null,
-        urgent: true,
-        saline_bags: null,
-        iv_supplies: null,
-        tape: null,
-        gauze: null,
-        bandages_2x2: null,
-        bandages_4x4: null,
-        bandages_6x9: null,
-        benznidazole: null,
-        aspirin: null,
-        gluscose: null,
-        albuterol: null,
-        Fexinidazole: null,
-        rifampicin: null,
-        ASMQ: null,
-        NECT: null
-      }]},
-    {name: 'Malaysia',
-    requests: []},
-    {name: 'Venezuela',
-    requests: []}
+  let sortUrgent = [
+    ["Sudan", sudanUrgent],
+    ["Syria", syriaUrgent],
+    ["Malyasia", malaysianUrgent],
+    ["Venezuela", venezuelaUrgent]
   ];
-let count = location.reduce((acc, site) => {
-  return site.foo.urgent ? acc : acc + 1;
-}, 0);
-console.log(count);
 
-//get data organized by site for reporting criteria
+  
+  }
+ 
 
 
-      let medicalSupplies = [
-        "saline_bags",
-        "iv_supplies",
-        "tape",
-        "gauze",
-        "bandages_2x2",
-        "bandages_4x4:",
-        "bandages_6x9",
-        "aspirin",
-        "gluscose"
-      ];
-      let prescriptions = [
-        "benznidazole",
-        "albuterol",
-        "Fexinidazole",
-        "rifampicin",
-        "ASMQ",
-        "NECT"
-      ];
+function sortNumber(a, b) {
+  return a[1] - b[1];
+}); 
+  sortUrgent.sort(sortNumber);
+console.log(sortUrgent);
 
+
+let benzUrgent = 0;
+let albuterolUrgent = 0;
+let fexinUrgent = 0;
+let rifampUrgent = 0;
+let ASMQUrgent = 0;
+let NECTUrgent = 0;
+let saline_bagsUrgent = 0;
+let iv_suppliesUrgent = 0;
+let tapeUrgent = 0;
+let gauzeUrgent = 0;
+let bandages_2x2Urgent = 0;
+let bandages_4x4Urgent = 0;
+let bandages_6x9Urgent = 0;
+let aspirinUrgent = 0;
+let gluscoseUrgent = 0;
+
+let rxUrgent = [];
+let msUrgent = [];
+
+//sort the data by urgency
+allRequests.forEach(request => {
+  if (request.urgent) urgentPriority.push(request);
+  else regularPriority.push(request);
+});
+
+//highest rx
+urgentPriority.forEach(request => {
+  prescriptions.forEach(rx => {
+    console.log("before", request.rx);
+    if (request.rx > 0) {
+      console.log(reqest.rx);
+      switch (request.rx) {
+        case "NECT":
+          NECTUrgent++;
+          break;
+        case "ASMQ":
+          ASMQUrgent++;
+          break;
+        case "rifampicin":
+          rifampUrgent++;
+          break;
+        case "Fexinidazole":
+          fexinUrgent++;
+          break;
+        case "albuterol":
+          albuterolUrgent++;
+          break;
+        case "benznidazole":
+          benzUrgent++;
+          break;
+        default:
+          break;
+      }
+    }
+  });
+});
+rxUrgent = [
+  ["benznidazole", benzUrgent],
+  ["albuterol", albuterolUrgent],
+  ["Fexinidazole", fexinUrgent],
+  ["rifampicin", rifampUrgent],
+  ["ASMQ", ASMQUrgent],
+  ["NECT", NECTUrgent]
+];
+function sortNumber(a, b) {
+  return a[1] - b[1];
 }
+rxUrgent.sort(sortNumber);
+console.log("sortrx", rxUrgent);
 
-//1. build urgentcount function
+ //highest demand ms
+ urgentPriority.forEach(request => {
+  for (let i = 0; i < medicalSupplies.length; i++) {
+    if (
+      request.medicalSupplies[i] === Null ||
+      request.medicalSupplies[i] === undefined
+    )
+      request.medicalSupplies[i] = 0;
+    switch (request.medicalSupplies[i]) {
+      case "saline_bags":
+        saline_bagsUrgent++;
+        break;
+      case "iv_supplies":
+        iv_suppliesUrgent++;
+        break;
+      case "tape":
+        tapeUrgent++;
+        break;
+      case "gauze":
+        gauzeUrgent++;
+        break;
+      case "bandages_2x2":
+        bandages_2x2Urgent++;
+        break;
+      case "bandages_4x4:":
+        bandages_4x4Urgent++;
+        break;
+      case "bandages_6x9":
+        bandages_6x9Urgent++;
+        break;
+      case "aspirin":
+        aspirinUrgent++;
+      case "gluscose":
+        gluscoseUrgent++;
+        break;
+      default:
+        break;
+    }
+  }
+});
+msUrgent = [
+  ["saline_bags", saline_bagsUrgent],
+  ["iv_supplies", iv_suppliesUrgent],
+  ["tape", tapeUrgent],
+  ["gauze", gauzeUrgent],
+  ["bandages_2x2", bandages_2x2Urgent],
+  ["bandages_4x4:", bandages_4x4Urgent],
+  ["bandages_6x9", bandages_6x9Urgent],
+  ["aspirin", aspirinUrgent],
+  ["gluscose", gluscoseUrgent]
+];
 
-//2. build item count function
 
-//3.loop through prescriptions
-    //loop through sites and call item count and then count the item in each one returning the qty to the site 
-    
-    prescriptions.forEach(item=>{
-        site.forEach(site=>{
-            site.results.item = sumQty(item, site) 
-        })
-        let sumQty = (item, arr) 
-    })
-    
-    // site[i].requests.urgent = site.reduce((acc, location) => {
-    //     return site[i].requests.urgent ? acc : acc + 1;
-    //   }, 0);
-    //   let count = location.reduce((acc, site) => {
-    //     return site.foo.urgent ? acc : acc + 1;
-    //   }, 0);
-      
-      let item = site[i].request.medicalSupply[j];
-      let arr = site[i].requests;
-      sumQty(item, arr)
-      sumQty = (item, arr)=>{
-          let sum = location.reduce((acc, val) => {
-            return acc + val.item;
-          }, 0);
-        
-          medicalSupplies.forEach(item=>{
-              sumQty(item, site[i]ffds
-                )
-          })
+msUrgent.sort(sortNumber);
+console.log("mssort", msUrgent);
+//function to sort by type of urgency and supply type
+const requestRatio = (arr, checkArr) => {
+  let count = 0;
