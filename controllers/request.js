@@ -10,20 +10,44 @@ const Force = require("../models/request.js");
 
 //INDEX
 router.get("/", (req, res) => {
-  Force.find({}, (error, allRequests) => {
-    if (error) {
-      res.send(error);
+  let site = [
+    {
+      name: "WorldWide",
+      qtyByItem: [],
+      requests: [],
+      regularPriority: [],
+      urgentPriority: []
+    },
+    {
+      name: "Sudan",
+      qtyByItem: [],
+      requests: [],
+      regularPriority: [],
+      urgentPriority: []
+    },
+    {
+      name: "Syria",
+      qtyByItem: [],
+      requests: [],
+      regularPriority: [],
+      urgentPriority: []
+    },
+    {
+      name: "Malaysia",
+      qtyByItem: [],
+      requests: [],
+      regularPriority: [],
+      urgentPriority: []
+    },
+    {
+      name: "Venezuela",
+      qtyByItem: [],
+      requests: [],
+      regularPriority: [],
+      urgentPriority: []
     }
-  });
-class Location{
-  constructor(){
-    this.
-  }
-}
-  //variables to sort and analyze the data
-  let urgentPriority = [];
-  let regularPriority = [];
-  let num = 0;
+  ];
+
   let medicalSupplies = [
     "saline_bags",
     "iv_supplies",
@@ -43,70 +67,129 @@ class Location{
     "ASMQ",
     "NECT"
   ];
+  //pull data from db first for all sites and then by site
+  Force.find({}, (error, allRequests) => {
+    if (error) {
+      res.send(error);
+    }
+    site[0].requests = allRequests;
 
-  //sort the data by urgency
-  allRequests.forEach(request => {
-    if (request.urgent) urgentPriority.push(request);
-    else regularPriority.push(request);
+    let arr = site[0].requests;
+
+    site[0].urgent = arr.reduce((acc, val) => {
+      return val.urgent ? acc + 1 : acc;
+    }, 0);
+
+    site[0].urgentPriority = [];
+    site[0].regularPriority = [];
+    allRequests.forEach(element => {
+      if (element.urgent) site[0].urgentPriority.push(element);
+      else site[0].regularPriority.push(element);
+    });
   });
+
+  for (let i = 1; i < site.length; i++) {
+    //get data by location
+    Force.find({ location: site[i].name }, (error, allRequests) => {
+      if (error) {
+        res.send(error);
+      }
+      site[i].requests = allRequests;
+      let arr = site[i].requests;
+      site[i].urgent = arr.reduce((acc, val) => {
+        return val.urgent ? acc + 1 : acc;
+      }, 0);
+
+      if (site[i].urgent) site[i].urgentPriority.push(element);
+      else element.regularPriority.push(element);
+    });
+  }
+
+  //function to aggregate data across results
+  const sumQty = (item, arr) => {
+    let sum = arr.reduce((acc, val) => {
+      return acc + val.item;
+    }, 0);
+  };
 
   //function to sort by type of urgency and supply type
   const requestRatio = (arr, checkArr) => {
     let count = 0;
-
-    arr.forEach(request => {
-      let keyArr = Object.keys(request._doc);
-      console.log(keyArr);
-      keyArr.forEach(element => {
-        if (checkArr.includes(element)) count++;
-      });
-    });
-    return count;
   };
 
-  let urgentRXCount = requestRatio(urgentPriority, prescriptions);
-  let regularRXCount = requestRatio(regularPriority, prescriptions);
-  let urgentMSCount = requestRatio(urgentPriority, medicalSupplies);
-  let regularMSCount = requestRatio(regularPriority, medicalSupplies);
-  console.log(urgentRXCount, urgentMSCount, regularRXCount, regularMSCount);
+  //aggregate data by location and count each item requested
+  site.forEach(location => {
+    let requests = location.requests;
+    prescriptions.forEach(item => {
+      location.qtyByItem.push([sumQty(item, requests)]);
+    });
+
+    medicalSupplies.forEach(item => {
+      location.qtyByItem.push([sumQty(item, requests)]);
+    });
+
+    let urgentRXCount = requestRatio(site[0].urgentPriority, prescriptions);
+    let regularRXCount = requestRatio(site[0].regularPriority, prescriptions);
+    let urgentMSCount = requestRatio(site[0].urgentPriority, medicalSupplies);
+    let regularMSCount = requestRatio(site[0].regularPriority, medicalSupplies);
+
+    res.render("index.ejs", { site: site });
+  });
+
+  //   arr.forEach(request => {
+  //     let keyArr = Object.keys(request._doc);
+  //     console.log(keyArr);
+  //     keyArr.forEach(element => {
+  //       if (checkArr.includes(element)) count++;
+  //     });
+  //   });
+  //   return count;
+  // };
+
+  // let urgentRXCount = requestRatio(urgentPriority, prescriptions);
+  // let regularRXCount = requestRatio(regularPriority, prescriptions);
+  // let urgentMSCount = requestRatio(urgentPriority, medicalSupplies);
+  // let regularMSCount = requestRatio(regularPriority, medicalSupplies);
+  // console.log(urgentRXCount, urgentMSCount, regularRXCount, regularMSCount);
 
   //display results
-  res.render("index.ejs", {
-    urgentPriority,
-    regularPriority,
-    urgentRXCount,
-    urgentMSCount,
-    regularRXCount,
-    regularMSCount
+  // res.render("index.ejs", {
+  //   site: site,
+  //   urgentPriority,
+  //   regularPriority,
+  //   urgentRXCount,
+  //   urgentMSCount,
+  //   regularRXCount,
+  //   regularMSCount
+  // });
+
+  //NEW
+  router.get("/new", (req, res) => {
+    res.render("new.ejs");
   });
-});
 
-//NEW
-router.get("/new", (req, res) => {
-  res.render("new.ejs");
-});
-
-//SHOW
-router.get("/:index", (req, res) => {
-  Force.findById(req.params.index, (err, foundOrder) => {
-    res.render("show.ejs", { foundOrder });
+  //SHOW
+  router.get("/:index", (req, res) => {
+    Force.findById(req.params.index, (err, foundOrder) => {
+      res.render("show.ejs", { foundOrder });
+    });
   });
-});
 
-//CREATE
-router.post("/", (req, res) => {
-  if (req.body.urgent === "on") {
-    req.body.urgent = true;
-  } else {
-    req.body.urgent = false;
-  }
-
-  Force.create(req.body, (error, newRequest) => {
-    if (error) {
-      res.send(error);
+  //CREATE
+  router.post("/", (req, res) => {
+    if (req.body.urgent === "on") {
+      req.body.urgent = true;
     } else {
-      res.redirect("/request");
+      req.body.urgent = false;
     }
+
+    Force.create(req.body, (error, newRequest) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.redirect("/request");
+      }
+    });
   });
 });
 //EDIT

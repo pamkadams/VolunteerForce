@@ -44,7 +44,7 @@
       <div class="d-flex">
           <div class ='summaryChild'> <div class="click-to-top"> <img src="/images/noun_Hospital_1553058.png" width=60% height = auto alt="Image 1" /><span> Urgent/Regular Orders</span></div>    
           
-          <p><span class="urgentPriority"><%=urgentPriority.length%></span><span class="btwtext">/</span><span class="regularPriority"><%=regularPriority.length%></span></p>
+          <p><span class="urgentPriority"><%=site[0].requests.urgent%></span><span class="btwtext">/</span><span class="regularPriority"><%=(site[0].requests.length-site[0].requests.urgent)%></span></p>
           </div>
 
           <div class ='summaryChild'> <div class="click-to-top"> <img src="/images/noun_medication_1995238.png" width=60% height = auto alt="Image 1" /><span> Prescription Requests </span></div>    
