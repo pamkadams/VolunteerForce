@@ -49,7 +49,7 @@
 
           <div class ='summaryChild'> <div class="click-to-top"> <img src="/images/noun_medication_1551510.png" width=60% height = auto alt="Image 1" /><span> Prescription Requests </span></div>    
           
-          <p><span class="urgentPriority"><%= urgentRXCount%></span><span class="btwtext">/</span><span class="regularPriority"><%=regularRXCount%></span></p>
+          <p><span class="urgentPriority"><%=urgentRXCount%></span><span class="btwtext">/</span><span class="regularPriority"><%=regularRXCount%></span></p>
           </div>      
           <div class ='summaryChild'> <div class="click-to-top"> <img src="/images/noun_bandages_1580604.png" width=60% height = auto alt="Image 1" /><span> Requests - Medical Supplies</span></div>    
           
@@ -68,7 +68,7 @@
 
 
     <div id="parent" class ="d-flex p-2">
-        <div class="d-flex"> <h5>Highest Demand: </h5>
+        <div class="d-flex"> <h5>Critical Demand: </h5>
           <p></p><h5><font style= "color: #de0549"><%=sortUrgent[3][0]%> (<%=sortUrgent[3][1]%>)</font> </h5>
 
         </div>
@@ -76,8 +76,8 @@
             <p></p><h5><%=sortRegular[0][0]%> (<%=sortRegular[0][1]%>) </h5>
   
         </div>
-        <div class="d-flex"> <h5>Demand: Medical Supplies</h5>
-            <p></p><h5><font style= "color: #de0549"><%=sortUrgent[3][0]%> (<%=sortUrgent[3][1]%>)</font> </h5>
+        <div class="d-flex"> <h5>RX Demand: </h5>
+            <p></p><h5><font style= "color: #de0549">NECT (128)</font> </h5>
         </div>
     </div>    
       <div id="parent" class ="d-flex p-2">
